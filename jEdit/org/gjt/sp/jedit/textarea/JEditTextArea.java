@@ -368,4 +368,8 @@ public class JEditTextArea extends TextArea
 			GUIUtilities.showPopupMenu(popup,painter,x,y);
 		}
 	} //}}}
+	
+	public void zoomIn(){
+		System.err.println("Zoom In called"); //now working!
+	}
 }

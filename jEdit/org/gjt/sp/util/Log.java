@@ -345,7 +345,8 @@ public class Log
 	} //}}}
 
 	private static String getTime(){
-		return "CURRENT TIME";
+		
+		return new Date().toString();
 	}
 	
 	//{{{ _logException() method

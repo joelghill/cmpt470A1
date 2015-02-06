@@ -494,8 +494,8 @@ next-buffer.label=Go to $Next Buffer
 recent-buffer.label=Go to $Recent Buffer
 show-buffer-switcher.label=Show $Buffer Switcher
 toggle-line-numbers.label=$Line Numbers
-zoom-in.label=Zoom $In
-zoom-out.label=Zoom $Out
+zoom-in.label=Zoom $+
+zoom-out.label=Zoom $-
 
 #{{{ Scrolling menu
 scrolling=scroll-to-current-line \

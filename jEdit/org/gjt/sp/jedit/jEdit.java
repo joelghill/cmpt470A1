@@ -2154,13 +2154,19 @@ public class jEdit
 	{
 		return newView(view,buffer,false);
 	} //}}}
-
-	public static View newViewBuffer(View view, Buffer buffer){
+	
+	/**
+	 * Creates a new view with a new buffer
+	 * @param buffer An existing buffer to place in new View
+	 */
+	public static View newViewBuffer(Buffer buffer){
+		//create new path for copy
 		String newpath = buffer.getPath()+"copy";
-		buffer.save(view,newpath, false);
-		Buffer newbuf = openFile(view, newpath);
-		System.err.println(newbuf);
-		return newView(view, newbuf, false);
+		while (!buffer.save(null,newpath, false)){
+			//Block until save returns true.
+		}
+		Buffer newbuf = getBuffer(newpath);
+		return newView(null,newbuf);
 	}
 	//{{{ newView() method
 	/**

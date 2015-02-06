@@ -535,7 +535,7 @@
 
 <ACTION NAME="new-view-buffer">
 	<CODE>
-		jEdit.newViewBuffer(view, buffer);
+		jEdit.newViewBuffer(buffer);
 	</CODE>
 </ACTION>
 

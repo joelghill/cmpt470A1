@@ -144,12 +144,14 @@ public class Log
 				{
 					for(int i = logLineCount; i < log.length; i++)
 					{
+						stream.write(timestamp[i]);
 						stream.write(log[i]);
 						stream.write(lineSep);
 					}
 				}
 				for(int i = 0; i < logLineCount; i++)
 				{
+					stream.write(timestamp[i]);
 					stream.write(log[i]);
 					stream.write(lineSep);
 				}
@@ -230,6 +232,8 @@ public class Log
 	public static void log(int urgency, Object source, Object message,
 		Throwable exception)
 	{
+		//Add a timestamp to every log
+		
 		// We can do nicer here, but this is a start...
 		log(urgency,source,message);
 		log(urgency,source,exception);
@@ -308,6 +312,7 @@ public class Log
 	//{{{ Instance variables
 	private static final Object LOCK = new Object();
 	private static final String[] log;
+	private static final String[] timestamp;
 	private static int logLineCount;
 	private static boolean wrap;
 	private static int level = WARNING;
@@ -327,6 +332,7 @@ public class Log
 		realErr = System.err;
 
 		log = new String[MAXLINES];
+		timestamp = new String[MAXLINES];
 		lineSep = System.getProperty("line.separator");
 		listModel = new LogListModel();
 	} //}}}
@@ -338,6 +344,10 @@ public class Log
 		return new LogPrintStream(urgency, source);
 	} //}}}
 
+	private static String getTime(){
+		return "CURRENT TIME";
+	}
+	
 	//{{{ _logException() method
 	private static void _logException(final int urgency,
 		final Object source,
@@ -351,6 +361,7 @@ public class Log
 		}
 	} //}}}
 
+	
 	//{{{ _log() method
 	private static void _log(int urgency, String source, String message)
 	{
@@ -359,6 +370,7 @@ public class Log
 
 		try
 		{
+			timestamp[logLineCount] = getTime();
 			log[logLineCount] = fullMessage;
 			if(++logLineCount >= log.length)
 			{

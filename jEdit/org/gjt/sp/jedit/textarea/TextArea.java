@@ -64,6 +64,8 @@ import java.util.*;
  */
 public class TextArea extends JComponent
 {
+	int fontSize = 12;
+	int scaleFont;
 	//{{{ TextArea constructor
 	public TextArea()
 	{

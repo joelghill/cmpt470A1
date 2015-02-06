@@ -28,6 +28,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 
 import org.gjt.sp.jedit.*;
+import org.gjt.sp.jedit.syntax.SyntaxStyle;
 
 import javax.swing.*;
 //}}}
@@ -370,8 +371,23 @@ public class JEditTextArea extends TextArea
 	} //}}}
 	
 	public void zoomIn(){
-		System.err.println("Zoom In called"); //now working!
-		this.scaleFont = this.scaleFont + 10;
-		this.painter.setFont(new Font("Monospaced", Font.PLAIN, this.scaleFont));
+		this.scale(1);
+	}
+	
+	public void zoomOut(){
+		this.scale(-1);
+	}
+	
+	public void scale(int amount){
+		this.scaleFont = this.scaleFont + amount;
+		if(this.scaleFont <= 0){
+			this.scaleFont = 1;
+		}
+		Font font = new Font("Monospaced", Font.PLAIN, this.scaleFont);
+		this.painter.setFont(font);
+		SyntaxStyle[] styles = new SyntaxStyle[1];
+		styles[0] = new SyntaxStyle(Color.black, Color.white, font);
+		this.painter.setStyles(styles);
+		this.painter.repaint();
 	}
 }

@@ -533,6 +533,18 @@
 	</CODE>
 </ACTION>
 
+<ACTION NAME="zoom-in">
+	<CODE>
+	    textArea.zoomIn();
+	</CODE>
+</ACTION>
+
+<ACTION NAME="zoom-out">
+	<CODE>
+	    textArea.zoomOut();
+	</CODE>
+</ACTION>
+
 <ACTION NAME="next-bracket">
 	<CODE>
 		textArea.goToNextBracket(false);

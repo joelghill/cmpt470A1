@@ -65,14 +65,14 @@ import java.util.*;
 public class TextArea extends JComponent
 {
 	int fontSize = 12;
-	int scaleFont;
+	int scaleFont = fontSize;
 	//{{{ TextArea constructor
 	public TextArea()
 	{
 		this(null);
 		inputHandlerProvider = new DefaultInputHandlerProvider(new TextAreaInputHandler(this));
 		setMouseHandler(new TextAreaMouseHandler(this));
-		Font font1 = new Font("Monospaced", Font.PLAIN, 12);
+		Font font1 = new Font("Monospaced", Font.PLAIN, fontSize);
 		painter.setFont(font1);
 		SyntaxStyle[] styles = new SyntaxStyle[1];
 		styles[0] = new SyntaxStyle(Color.black, Color.white, font1);

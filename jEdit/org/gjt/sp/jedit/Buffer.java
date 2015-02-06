@@ -1589,7 +1589,21 @@ public class Buffer extends JEditBuffer
 		setFlag(AUTORELOAD,jEdit.getBooleanProperty("autoReload"));
 		setFlag(AUTORELOAD_DIALOG,jEdit.getBooleanProperty("autoReloadDialog"));
 	} //}}}
+	
+	/*
+	//Buffer constructor to clone buffer
+	public Buffer(Buffer other){
 
+		this.markers = other.markers;
+		this.setFlag(TEMPORARY, other.getFlag(TEMPORARY));
+		this.setPath(other.getPath());
+		this.setFlag(UNTITLED, true);
+		this.setFlag(NEW_FILE, true);
+		this.setFlag(AUTORELOAD,jEdit.getBooleanProperty("autoReload"));
+		this.setFlag(AUTORELOAD_DIALOG,jEdit.getBooleanProperty("autoReloadDialog"));
+	
+	}
+	*/
 	//{{{ commitTemporary() method
 	void commitTemporary()
 	{

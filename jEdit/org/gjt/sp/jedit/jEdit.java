@@ -23,7 +23,9 @@ package org.gjt.sp.jedit;
 
 //{{{ Imports
 import bsh.UtilEvalError;
+
 import javax.swing.*;
+
 import java.awt.event.KeyEvent;
 import java.awt.*;
 import java.io.*;
@@ -37,7 +39,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.XMLReaderFactory;
-
 import org.gjt.sp.jedit.bufferio.BufferIORequest;
 import org.gjt.sp.jedit.bufferio.JEditKillRing;
 import org.gjt.sp.jedit.buffer.KillRing;
@@ -2154,6 +2155,13 @@ public class jEdit
 		return newView(view,buffer,false);
 	} //}}}
 
+	public static View newViewBuffer(View view, Buffer buffer){
+		String newpath = buffer.getPath()+"copy";
+		buffer.save(view,newpath, false);
+		Buffer newbuf = openFile(view, newpath);
+		System.err.println(newbuf);
+		return newView(view, newbuf, false);
+	}
 	//{{{ newView() method
 	/**
 	 * Creates a new view of a buffer.

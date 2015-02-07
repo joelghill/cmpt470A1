@@ -533,6 +533,12 @@
 	</CODE>
 </ACTION>
 
+<ACTION NAME="new-view-buffer">
+	<CODE>
+		jEdit.newViewBuffer(buffer);
+	</CODE>
+</ACTION>
+
 <ACTION NAME="zoom-in">
 	<CODE>
 	    textArea.zoomIn();

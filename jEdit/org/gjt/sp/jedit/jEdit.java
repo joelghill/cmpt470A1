@@ -23,7 +23,9 @@ package org.gjt.sp.jedit;
 
 //{{{ Imports
 import bsh.UtilEvalError;
+
 import javax.swing.*;
+
 import java.awt.event.KeyEvent;
 import java.awt.*;
 import java.io.*;
@@ -37,7 +39,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.XMLReaderFactory;
-
 import org.gjt.sp.jedit.bufferio.BufferIORequest;
 import org.gjt.sp.jedit.bufferio.JEditKillRing;
 import org.gjt.sp.jedit.buffer.KillRing;
@@ -2153,7 +2154,20 @@ public class jEdit
 	{
 		return newView(view,buffer,false);
 	} //}}}
-
+	
+	/**
+	 * Creates a new view with a new buffer
+	 * @param buffer An existing buffer to place in new View
+	 */
+	public static View newViewBuffer(Buffer buffer){
+		//create new path for copy
+		String newpath = buffer.getPath()+"copy";
+		while (!buffer.save(null,newpath, false)){
+			//Block until save returns true.
+		}
+		Buffer newbuf = getBuffer(newpath);
+		return newView(null,newbuf);
+	}
 	//{{{ newView() method
 	/**
 	 * Creates a new view of a buffer.

@@ -480,6 +480,7 @@ next-fold.label=Go to $Next Fold
 #{{{ View menu
 view=new-view \
      new-plain-view \
+     new-view-buffer \
      close-view \
      - \
      prev-buffer \
@@ -497,6 +498,7 @@ view=new-view \
 view.label=$View
 new-view.label=New $View
 new-plain-view.label=Ne$w Plain View
+new-view-buffer.label=New View with Buffer
 close-view.label=$Close View
 prev-buffer.label=Go to $Previous Buffer
 next-buffer.label=Go to $Next Buffer

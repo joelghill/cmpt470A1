@@ -20,9 +20,13 @@
 package org.gjt.sp.jedit.gui;
 
 import javax.swing.*;
+
 import java.awt.*;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 import org.gjt.sp.jedit.jEdit;
+import org.gjt.sp.jedit.gui.AboutDialog.AboutPanel.AnimationThread;
 import org.gjt.sp.util.Log;
 
 /**
@@ -31,14 +35,35 @@ import org.gjt.sp.util.Log;
  */
 public class SplashScreen extends JComponent
 {
+	
 	public SplashScreen()
 	{
+		String ncidJordan = "jcl175";
+		String emailJordan = "jcl175@mail.usask.ca";
+		String ncidJoel = "jgh719";
+		String emailJoel = "jgh719@mail.usask.ca";
+		
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		setBackground(Color.white);
 
 		Font font = new Font("Dialog",Font.PLAIN,10);
 		setFont(font);
 		fm = getFontMetrics(font);
+		
+		
+		/*
+		 * Set scrolling text
+		  */
+		
+		text = new Vector(50);
+		text.addElement(ncidJordan);
+		text.addElement(emailJordan);
+		text.addElement(ncidJoel);
+		text.addElement(emailJoel);
+		maxWidth = fm.stringWidth(emailJordan) + 200;
+		scrollPosition = -250;
+
+		thread = new AnimationThread();
 
 		image = getToolkit().getImage(
 			getClass().getResource("/org/gjt/sp/jedit/icons/splash.png"));
@@ -132,6 +157,7 @@ public class SplashScreen extends JComponent
 
 	public synchronized void paintComponent(Graphics g)
 	{
+		
 		Dimension size = getSize();
 
 		g.setColor(Color.black);
@@ -153,14 +179,114 @@ public class SplashScreen extends JComponent
 				     image.getHeight(this) + (PROGRESS_HEIGHT
 							      + fm.getAscent() + fm.getDescent()) / 2);
 		}
+		
+		
+		
+	
 
 
 		String version = jEdit.getVersion();
 		g.drawString(version,
 			getWidth() - fm.stringWidth(version) - 2,
 			image.getHeight(this) - fm.getDescent());
+		
+		System.out.print(getHeight());
+		
+		/*
+		 * Scrolling text
+		 */
+		
+		int height = fm.getHeight();
+		int firstLine = scrollPosition / height;
+
+		int firstLineOffset = height - scrollPosition % height;
+		int lines = (getHeight() - TOP - BOTTOM) / height;
+
+		int y = firstLineOffset;
+		
+		
+		for(int i = 0; i <= lines; i++)
+		{
+			if(i + firstLine >= 0 && i + firstLine < text.size())
+			{
+				String line = (String)text.get(i + firstLine);
+				g.drawString(line,(maxWidth - fm.stringWidth(line))/2,y);
+			}
+			y += fm.getHeight();
+		}
+		
 		notify();
+		
 	}
+	
+	public void addNotify()
+	{
+		super.addNotify();
+		thread.start();
+	}
+
+	public void removeNotify()
+	{
+		super.removeNotify();
+		thread.kill();
+	}
+	
+	class AnimationThread extends Thread
+	{
+		private boolean running = true;
+		private long last;
+
+		AnimationThread()
+		{
+			super("Start Up scrolling text");
+			setPriority(Thread.MIN_PRIORITY);
+		}
+		
+		public void kill()
+		{
+			running = false;
+		}
+
+		public void run()
+		{
+			FontMetrics fm = getFontMetrics(getFont());
+			int max = (text.size() * fm.getHeight());
+
+			while (running)
+			{
+				scrollPosition += 1;
+
+				if(scrollPosition > max)
+					scrollPosition = -250;
+
+				if(last != 0)
+				{
+					long frameDelay =
+						System.currentTimeMillis()
+						- last;
+
+					try
+					{
+						Thread.sleep(
+							75
+							- frameDelay);
+					}
+					catch(Exception e)
+					{
+					}
+				}
+
+				last = System.currentTimeMillis();
+
+				repaint(getWidth() / 2 - maxWidth,
+					TOP,maxWidth * 2,
+					getHeight() - TOP - BOTTOM);
+			}
+		}
+	}
+
+
+	
 
 	// private members
 	private final FontMetrics fm;
@@ -172,4 +298,13 @@ public class SplashScreen extends JComponent
 	private String label;
 	private String lastLabel;
 	private long lastAdvanceTime = System.currentTimeMillis();
+	
+	//position and thread for scrolling text
+	Vector text;
+	int scrollPosition;
+	AnimationThread thread;
+	public static int TOP = 0;
+	public static int BOTTOM = 0;
+	int maxWidth;
+
 }

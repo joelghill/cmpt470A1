@@ -551,6 +551,12 @@
 	</CODE>
 </ACTION>
 
+<ACTION NAME="show-whitespace">
+	<CODE>
+	    textArea.makeWhitespace();
+	</CODE>
+</ACTION>
+
 <ACTION NAME="next-bracket">
 	<CODE>
 		textArea.goToNextBracket(false);

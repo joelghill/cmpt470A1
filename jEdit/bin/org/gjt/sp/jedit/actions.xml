@@ -533,6 +533,12 @@
 	</CODE>
 </ACTION>
 
+<ACTION NAME="new-view-buffer">
+	<CODE>
+		jEdit.newViewBuffer(buffer);
+	</CODE>
+</ACTION>
+
 <ACTION NAME="zoom-in">
 	<CODE>
 	    textArea.zoomIn();
@@ -542,6 +548,12 @@
 <ACTION NAME="zoom-out">
 	<CODE>
 	    textArea.zoomOut();
+	</CODE>
+</ACTION>
+
+<ACTION NAME="toggle-whitespace">
+	<CODE>
+	    textArea.toggleWhitespace();
 	</CODE>
 </ACTION>
 

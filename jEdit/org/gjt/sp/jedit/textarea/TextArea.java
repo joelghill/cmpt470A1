@@ -66,6 +66,7 @@ public class TextArea extends JComponent
 {
 	int fontSize = 12;
 	int scaleFont = fontSize;
+	boolean whitespaceToggle = false;
 	//{{{ TextArea constructor
 	public TextArea()
 	{
@@ -1774,18 +1775,26 @@ forward_scan:	do
 	
 	
 	/*
-	 * INCOMPLETE
-	 * JOEL
+	 * Change 6
+	 * toggle whitespace characters
 	 * 
 	 */
-	public void makeWhitespace(){
+	public void toggleWhitespace(){
 		String temp = buffer.getText(0, buffer.getLength());
 		buffer.remove(0, buffer.getLength());
-		temp.replaceAll("\\s+", "SPACE");
-		
+		if (!whitespaceToggle) {
+			temp = temp.replaceAll("[ ]", "␣");
+			temp = temp.replaceAll("\t", "/\\t");
+			temp = temp.replaceAll("\n", "/\\n");	
+			whitespaceToggle = true;
+		} else {
+			temp = temp.replaceAll("␣"," ");
+			temp = temp.replaceAll("/t","\t" );
+			temp = temp.replaceAll("/n", "\n");
+			whitespaceToggle = false;
+		}
 		buffer.insert(0,temp);
-		
-	
+		painter.repaint();
 	}
 
 	//{{{ removeFromSelection() method

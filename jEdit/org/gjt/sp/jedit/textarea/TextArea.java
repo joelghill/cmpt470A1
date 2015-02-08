@@ -123,6 +123,8 @@ public class TextArea extends JComponent
 		buffer.insert(0,"ahaha coucou\ncaca");
 		setBuffer(buffer);
 	} //}}}
+	
+	
 
 	//{{{ TextArea constructor
 	/**
@@ -1769,6 +1771,22 @@ forward_scan:	do
 		selectionManager.removeFromSelection(sel);
 		finishCaretUpdate(caretLine,NO_SCROLL,true);
 	} //}}}
+	
+	
+	/*
+	 * INCOMPLETE
+	 * JOEL
+	 * 
+	 */
+	public void makeWhitespace(){
+		String temp = buffer.getText(0, buffer.getLength());
+		buffer.remove(0, buffer.getLength());
+		temp.replaceAll("\\s+", "SPACE");
+		
+		buffer.insert(0,temp);
+		
+	
+	}
 
 	//{{{ removeFromSelection() method
 	/**

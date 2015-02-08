@@ -492,7 +492,7 @@ view=new-view \
      - \
      zoom-in \
      zoom-out \
-     show-whitespace \
+     toggle-whitespace \
      %scrolling \
      %splitting \
      %docking
@@ -508,7 +508,7 @@ show-buffer-switcher.label=Show $Buffer Switcher
 toggle-line-numbers.label=$Line Numbers
 zoom-in.label=Zoom $+
 zoom-out.label=Zoom $-
-show-whitespace.label=Show Whitespace Characters
+toggle-whitespace.label=toggle Whitespace Characters
 
 #{{{ Scrolling menu
 scrolling=scroll-to-current-line \

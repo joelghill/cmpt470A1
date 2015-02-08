@@ -551,9 +551,9 @@
 	</CODE>
 </ACTION>
 
-<ACTION NAME="show-whitespace">
+<ACTION NAME="toggle-whitespace">
 	<CODE>
-	    textArea.makeWhitespace();
+	    textArea.toggleWhitespace();
 	</CODE>
 </ACTION>
 

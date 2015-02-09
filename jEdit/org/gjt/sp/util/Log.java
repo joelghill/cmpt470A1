@@ -144,14 +144,14 @@ public class Log
 				{
 					for(int i = logLineCount; i < log.length; i++)
 					{
-						stream.write(timestamp[i]);
+						//stream.write(timestamp[i]);
 						stream.write(log[i]);
 						stream.write(lineSep);
 					}
 				}
 				for(int i = 0; i < logLineCount; i++)
 				{
-					stream.write(timestamp[i]);
+					//stream.write(timestamp[i]);
 					stream.write(log[i]);
 					stream.write(lineSep);
 				}
@@ -312,7 +312,7 @@ public class Log
 	//{{{ Instance variables
 	private static final Object LOCK = new Object();
 	private static final String[] log;
-	private static final String[] timestamp;
+	//private static final String[] timestamp;
 	private static int logLineCount;
 	private static boolean wrap;
 	private static int level = WARNING;
@@ -332,7 +332,7 @@ public class Log
 		realErr = System.err;
 
 		log = new String[MAXLINES];
-		timestamp = new String[MAXLINES];
+		//timestamp = new String[MAXLINES];
 		lineSep = System.getProperty("line.separator");
 		listModel = new LogListModel();
 	} //}}}
@@ -366,12 +366,12 @@ public class Log
 	//{{{ _log() method
 	private static void _log(int urgency, String source, String message)
 	{
-		String fullMessage = '[' + urgencyToString(urgency) + "] " + source
+		String fullMessage = getTime() + '[' + urgencyToString(urgency) + "] " + source
 			+ ": " + message;
 
 		try
 		{
-			timestamp[logLineCount] = getTime();
+			//timestamp[logLineCount] = getTime();
 			log[logLineCount] = fullMessage;
 			if(++logLineCount >= log.length)
 			{
